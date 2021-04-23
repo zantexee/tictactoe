@@ -31,6 +31,10 @@ body {
 
 .gamebox {
   border: 1px solid black;
+  transition: background 0.1s;
+}
+.gamebox:hover {
+  background: rgba(137, 119, 241, 0.712);
 }
 
 /* utility classes */
