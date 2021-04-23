@@ -1,0 +1,37 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  min-height: 100vh;
+}
+
+/* navbar styles */
+
+.navbar {
+  justify-self: flex-start;
+}
+
+/* container styles */
+
+.container {
+  background: hsl(0, 51%, 67%);
+  width: 600px;
+  height: 600px;
+}
+
+/* gameboard styles*/
+
+.gameboard {
+  background: #eee;
+  width: 400px;
+  height: 400px;
+}
+
+/* utility classes */
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
