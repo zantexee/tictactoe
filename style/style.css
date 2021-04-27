@@ -16,16 +16,16 @@ body {
 
 .container {
   background: hsl(0, 51%, 67%);
-  width: 600px;
-  height: 600px;
+  width: 400px;
+  height: 400px;
 }
 
 /* gameboard styles*/
 
 .gameboard {
   background: #eee;
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   padding: 5px;
 }
 
