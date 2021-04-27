@@ -10,6 +10,7 @@ const gameBoard = (() => {
     [' ', '7'],
     [' ', '8'],
   ];
+
   let currentSign = 'X';
   let currentMove = 1;
 
@@ -40,38 +41,40 @@ const gameBoard = (() => {
     const xArr = gameBoard.positionArray.filter((position) => position[0] === 'X');
     const oArr = gameBoard.positionArray.filter((position) => position[0] === 'O');
 
-    for (let i = 0; i < xArr.length; i++) {
-      for (let j = 0; j < winningPositions.length; j++) {
-        if (xArr.length - i - 2 > 0)
-          if (xArr[i][1] === winningPositions[j][0]) {
-            if (xArr[i + 1][1] && xArr[i + 2][1]) {
-              if (
-                xArr[i + 1][1] === winningPositions[j][1] &&
-                xArr[i + 2][1] === winningPositions[j][2]
-              ) {
-                console.log('x won');
+    if (gameBoard.currentSign === 'X') {
+      for (let i = 0; i < xArr.length; i++)
+        for (let j = 0; j < winningPositions.length; j++) {
+          if (xArr.length - i - 2 > 0)
+            if (xArr[i][1] === winningPositions[j][0]) {
+              if (xArr[i + 1][1] && xArr[i + 2][1]) {
+                if (
+                  xArr[i + 1][1] === winningPositions[j][1] &&
+                  xArr[i + 2][1] === winningPositions[j][2]
+                ) {
+                  console.log('x won');
+                  return;
+                }
+              }
+            }
+        }
+    }
+
+    if (gameBoard.currentSign === 'O')
+      for (let i = 0; i < oArr.length; i++) {
+        for (let j = 0; j < winningPositions.length; j++) {
+          if (oArr.length - i - 2 > 0)
+            if (oArr[i][1] === winningPositions[j][0]) {
+              if (oArr[i + 1][1] && oArr[i + 2][1]) {
+                if (
+                  oArr[i + 1][1] === winningPositions[j][1] &&
+                  oArr[i + 2][1] === winningPositions[j][2]
+                )
+                  console.log('o won');
                 return;
               }
             }
-          }
+        }
       }
-    }
-    for (let i = 0; i < oArr.length; i++) {
-      for (let j = 0; j < winningPositions.length; j++) {
-        if (oArr.length - i - 2 > 0)
-          if (oArr[i][1] === winningPositions[j][0]) {
-            if (oArr[i + 1][1] && oArr[i + 2][1]) {
-              if (
-                oArr[i + 1][1] === winningPositions[j][1] &&
-                oArr[i + 2][1] === winningPositions[j][2]
-              )
-                console.log('o won');
-              return;
-            }
-          }
-      }
-    }
-    console.log('x arr', xArr, 'o arr', oArr);
   };
 
   return {
@@ -95,6 +98,7 @@ const displayController = (() => {
       gameBoard.changeCurrentSign();
       if (!div.textContent) div.textContent = gameBoard.currentSign;
       gameBoard.setPosition(gameBoard.currentSign, divNumber);
+      gameBoard.checkWinner();
     }),
   );
 })();
