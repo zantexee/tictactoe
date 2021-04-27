@@ -41,6 +41,7 @@ body {
   border: 3px solid #5e6973;
   border-radius: 10px;
   transition: background 0.1s;
+  user-select: none;
 }
 .gamebox:hover {
   background: #6abea7;
