@@ -51,7 +51,7 @@ const gameBoard = (() => {
                   xArr[i + 1][1] === winningPositions[j][1] &&
                   xArr[i + 2][1] === winningPositions[j][2]
                 ) {
-                  console.log('x won');
+                  displayController.displayWinner('x');
                   return;
                 }
               }
@@ -69,7 +69,7 @@ const gameBoard = (() => {
                   oArr[i + 1][1] === winningPositions[j][1] &&
                   oArr[i + 2][1] === winningPositions[j][2]
                 )
-                  console.log('o won');
+                  displayController.displayWinner('o');
                 return;
               }
             }
@@ -103,6 +103,41 @@ const displayController = (() => {
       }),
     );
   })();
+
+  const displayWinner = (winner) => {
+    const winnerElement = document.getElementById('player-announce');
+
+    const textNode = document.createTextNode(`${winner} won!`);
+
+    winnerElement.appendChild(textNode);
+  };
+  const clearGameboard = () => {
+    const gameBoardDiv = document.getElementById('gameboard');
+
+    const boxDivs = gameBoardDiv.getElementsByClassName('gamebox');
+    const boxDivsArr = Array.prototype.slice.call(boxDivs);
+
+    boxDivsArr.forEach((div) => {
+      div.textContent = '';
+    });
+
+    gameBoard.positionArray = [
+      [' ', '0'],
+      [' ', '1'],
+      [' ', '2'],
+      [' ', '3'],
+      [' ', '4'],
+      [' ', '5'],
+      [' ', '6'],
+      [' ', '7'],
+      [' ', '8'],
+    ];
+  };
+
+  return {
+    displayWinner,
+    clearGameboard,
+  };
 })();
 
 const player = () => {

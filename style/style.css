@@ -10,31 +10,38 @@ body {
 
 .navbar {
   justify-self: flex-start;
+  flex-flow: column nowrap;
+}
+.navbar h3 {
+  margin: 5px 0;
 }
 
 /* container styles */
 
 .container {
-  background: hsl(0, 51%, 67%);
+  background: #5e6973;
   width: 400px;
   height: 400px;
+  border-radius: 10px;
+  box-shadow: 0 10px 10px black;
 }
 
 /* gameboard styles*/
 
 .gameboard {
-  background: #eee;
+  background: #7cffc4;
   width: 300px;
   height: 300px;
   padding: 5px;
 }
 
 .gamebox {
-  border: 1px solid black;
+  border: 3px solid black;
+  border-radius: 10px;
   transition: background 0.1s;
 }
 .gamebox:hover {
-  background: rgba(137, 119, 241, 0.712);
+  background: #6abea7;
 }
 
 /* utility classes */
@@ -53,4 +60,14 @@ body {
     '. . .'
     '. . .'
     '. . .';
+}
+
+.medium-size {
+  width: 150px;
+  height: 50px;
+  margin: 10px 0;
+  background: #9ffff5;
+  border: 2px solid #6abea7;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px black;
 }
