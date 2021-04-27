@@ -44,6 +44,30 @@ body {
   background: #6abea7;
 }
 
+/* aside styles*/
+aside.container {
+  margin: 20px 0;
+  height: 100px;
+}
+aside.flex {
+  justify-content: space-around;
+}
+
+/* btn classes*/
+.btn {
+  color: white;
+  width: 100px;
+  height: 50px;
+  outline: none;
+  background: none;
+  border: 0;
+  border-bottom: 3px solid hsl(164, 39%, 58%);
+  transition: background 0.1s linear;
+}
+.btn:hover {
+  background: hsl(164, 50%, 72%);
+}
+
 /* utility classes */
 
 .flex {
@@ -66,8 +90,8 @@ body {
   width: 150px;
   height: 50px;
   margin: 10px 0;
-  background: #9ffff5;
-  border: 2px solid #6abea7;
-  border-radius: 10px;
-  box-shadow: 0 5px 5px black;
+  background: #5e6973;
+  border: 4px solid #7cffc4;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px black;
 }
