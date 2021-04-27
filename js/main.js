@@ -88,21 +88,19 @@ const gameBoard = (() => {
 })();
 
 const displayController = (() => {
-  const initializeGameboard = (() => {
-    const gameBoardDiv = document.getElementById('gameboard');
+  const gameBoardDiv = document.getElementById('gameboard');
 
-    const boxDivs = gameBoardDiv.getElementsByClassName('gamebox');
-    const boxDivsArr = Array.prototype.slice.call(boxDivs);
+  const boxDivs = gameBoardDiv.getElementsByClassName('gamebox');
+  const boxDivsArr = Array.prototype.slice.call(boxDivs);
 
-    boxDivsArr.forEach((div, divNumber) =>
-      div.addEventListener('click', () => {
-        gameBoard.changeCurrentSign();
-        if (!div.textContent) div.textContent = gameBoard.currentSign;
-        gameBoard.setPosition(gameBoard.currentSign, divNumber);
-        gameBoard.checkWinner();
-      }),
-    );
-  })();
+  boxDivsArr.forEach((div, divNumber) =>
+    div.addEventListener('click', () => {
+      gameBoard.changeCurrentSign();
+      if (!div.textContent) div.textContent = gameBoard.currentSign;
+      gameBoard.setPosition(gameBoard.currentSign, divNumber);
+      gameBoard.checkWinner();
+    }),
+  );
 })();
 
 const player = () => {
