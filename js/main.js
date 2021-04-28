@@ -58,14 +58,21 @@ const gameBoard = (() => {
 
     const checkWholeArray = (arr, sign) => {
       winningPositions.forEach((winCondition) => {
-        const isTrue = winCondition.every((element) => arr.includes(element));
+        if (gameBoard.gameState === 'finished') return;
 
+        const isTrue = winCondition.every((element) => arr.includes(element));
+        if (arr.length === 5 && isTrue === false) {
+          displayController.displayWinner('tie');
+          gameBoard.gameState = 'finished';
+          return;
+        }
         if (isTrue) {
           if (sign === 'X') {
             displayController.displayWinner('X');
             gameBoard.gameState = 'finished';
             return;
           }
+
           displayController.displayWinner('O');
           gameBoard.gameState = 'finished';
           return;
@@ -73,9 +80,11 @@ const gameBoard = (() => {
       });
     };
 
+    // constructs an array of every pair that has the X element from the gameBoard.positionsArray and returns the position
     const xArr = gameBoard.positionArray
       .filter((position) => position[0] === 'X')
       .map((arr) => arr[1]);
+
     const oArr = gameBoard.positionArray
       .filter((position) => position[0] === 'O')
       .map((arr) => arr[1]);
@@ -111,20 +120,25 @@ const displayController = (() => {
         }
         gameBoard.changeCurrentSign();
         if (!div.textContent) div.textContent = gameBoard.currentSign;
-
         gameBoard.setPosition(gameBoard.currentSign, divNumber);
         gameBoard.checkWinner();
       }),
     );
   })();
 
+  //  displays winner in designated box
   const displayWinner = (winner, clear) => {
     const winnerElement = document.getElementById('player-announce');
-    const textNode = document.createTextNode(`${winner} won!`);
-
     if (clear) return (winnerElement.innerHTML = '');
-    winnerElement.appendChild(textNode);
+    if (winner !== 'tie') {
+      const textNode = document.createTextNode(`${winner} won!`);
+
+      return winnerElement.appendChild(textNode);
+    }
+    const textNode = document.createTextNode("It's a tie!");
+    return winnerElement.appendChild(textNode);
   };
+
   const clearGameboard = () => {
     const gameBoardDiv = document.getElementById('gameboard');
 
@@ -143,11 +157,11 @@ const displayController = (() => {
   };
 })();
 
-const player = () => {
-  const playerSign = gameBoard.positionArray.length > 0 ? 'O' : 'X';
+const player = (sign) => {
+  const playerSign = sign;
 
   return { playerSign };
 };
 
-const player1 = player();
-const player2 = player();
+const player1 = player('x');
+const player2 = player('o');
