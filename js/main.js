@@ -28,7 +28,6 @@ const gameBoard = (() => {
   };
 
   const resetGameboard = () => {
-    console.log('meow');
     gameBoard.currentSign = 'X';
     gameBoard.currentMove = 1;
     gameBoard.gameState = 'starting';
@@ -57,46 +56,33 @@ const gameBoard = (() => {
       ['2', '4', '6'],
     ];
 
-    const xArr = gameBoard.positionArray.filter((position) => position[0] === 'X');
-    const oArr = gameBoard.positionArray.filter((position) => position[0] === 'O');
+    const checkWholeArray = (arr, sign) => {
+      winningPositions.forEach((winCondition) => {
+        const isTrue = winCondition.every((element) => arr.includes(element));
 
-    if (gameBoard.currentSign === 'X') {
-      for (let i = 0; i < xArr.length; i++)
-        for (let j = 0; j < winningPositions.length; j++) {
-          if (xArr.length - i - 2 > 0)
-            if (xArr[i][1] === winningPositions[j][0]) {
-              if (xArr[i + 1][1] && xArr[i + 2][1]) {
-                if (
-                  xArr[i + 1][1] === winningPositions[j][1] &&
-                  xArr[i + 2][1] === winningPositions[j][2]
-                ) {
-                  displayController.displayWinner('x');
-                  gameBoard.gameState = 'finished';
-                  return;
-                }
-              }
-            }
+        if (isTrue) {
+          if (sign === 'X') {
+            displayController.displayWinner('X');
+            gameBoard.gameState = 'finished';
+            return;
+          }
+          displayController.displayWinner('O');
+          gameBoard.gameState = 'finished';
+          return;
         }
-    }
+      });
+    };
 
-    if (gameBoard.currentSign === 'O')
-      for (let i = 0; i < oArr.length; i++) {
-        for (let j = 0; j < winningPositions.length; j++) {
-          if (oArr.length - i - 2 > 0)
-            if (oArr[i][1] === winningPositions[j][0]) {
-              if (oArr[i + 1][1] && oArr[i + 2][1]) {
-                if (
-                  oArr[i + 1][1] === winningPositions[j][1] &&
-                  oArr[i + 2][1] === winningPositions[j][2]
-                ) {
-                  displayController.displayWinner('o');
-                  gameBoard.gameState = 'finished';
-                  return;
-                }
-              }
-            }
-        }
-      }
+    const xArr = gameBoard.positionArray
+      .filter((position) => position[0] === 'X')
+      .map((arr) => arr[1]);
+    const oArr = gameBoard.positionArray
+      .filter((position) => position[0] === 'O')
+      .map((arr) => arr[1]);
+
+    if (gameBoard.currentSign === 'X') checkWholeArray(xArr, 'X');
+
+    if (gameBoard.currentSign === 'O') checkWholeArray(oArr, 'O');
   };
 
   return {
