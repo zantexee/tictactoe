@@ -2,7 +2,7 @@
 
 ### Part of The Odin Project's curriculum.
 
-> - Live Preview(to be added)
+> - [Live Preview](https://zantexee.github.io/tictactoe/)
 
 #### License
 
