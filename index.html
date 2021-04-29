@@ -14,6 +14,7 @@
       <h1>Tic Tac Toe</h1>
       <div class="medium-size flex"><h3 id="player-announce"></h3></div>
     </nav>
+
     <main class="container flex">
       <div class="gameboard grid" id="gameboard">
         <div class="flex gamebox"></div>
@@ -27,9 +28,30 @@
         <div class="flex gamebox"></div>
       </div>
     </main>
+    <section class="minimized container flex usr" id="player-data-container">
+      <form class="player-data flex" id="player-data-form">
+        <p>Player 1</p>
+        <input
+          type="text"
+          name="Player 1 Username"
+          class="player-input"
+          required="true"
+          placeholder="username"
+        />
+        <p>Player 2</p>
+        <input
+          type="text"
+          name="Player 2 Username"
+          class="player-input"
+          required="true"
+          placeholder="username"
+        />
+        <button class="btn" type="submit">Done</button>
+      </form>
+    </section>
     <section class="container flex">
       <button class="btn" onclick="displayController.clearGameboard()">Restart</button>
-      <button class="btn">Start</button>
+      <button class="btn" onclick="displayController.expandUserData()">Start</button>
     </section>
   </body>
 </html>

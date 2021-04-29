@@ -1,3 +1,13 @@
+const player = (sign) => {
+  const playerSign = sign;
+  let playerName = '';
+
+  return { playerSign, playerName };
+};
+
+const player1 = player('x');
+const player2 = player('o');
+
 const gameBoard = (() => {
   const positionArray = [
     [' ', '0'],
@@ -30,7 +40,7 @@ const gameBoard = (() => {
   const resetGameboard = () => {
     gameBoard.currentSign = 'X';
     gameBoard.currentMove = 1;
-    gameBoard.gameState = 'starting';
+    gameBoard.gameState = 'started';
     gameBoard.positionArray = [
       [' ', '0'],
       [' ', '1'],
@@ -68,12 +78,11 @@ const gameBoard = (() => {
         }
         if (isTrue) {
           if (sign === 'X') {
-            displayController.displayWinner('X');
+            displayController.displayWinner(player1.playerName);
             gameBoard.gameState = 'finished';
             return;
           }
-
-          displayController.displayWinner('O');
+          displayController.displayWinner(player2.playerName);
           gameBoard.gameState = 'finished';
           return;
         }
@@ -115,6 +124,7 @@ const displayController = (() => {
 
     boxDivsArr.forEach((div, divNumber) =>
       div.addEventListener('click', () => {
+        if (gameBoard.gameState === 'starting') return expandUserData();
         if (gameBoard.gameState === 'finished') {
           return displayController.clearGameboard();
         }
@@ -151,17 +161,26 @@ const displayController = (() => {
     displayController.displayWinner('', true);
     gameBoard.resetGameboard();
   };
+  const expandUserData = () => {
+    if (gameBoard.gameState === 'started') return;
+    const element = document.getElementById('player-data-container');
+    const formElement = document.getElementById('player-data-form');
+    if (element.classList.contains('minimized')) {
+      formElement.addEventListener('submit', (e) => {
+        e.preventDefault();
+        player1.playerName = e.target[0].value;
+        player2.playerName = e.target[1].value;
+        expandUserData();
+        gameBoard.gameState = 'started';
+      });
+      return (element.classList = 'container flex usr');
+    }
+
+    return (element.classList = 'minimized container flex usr');
+  };
   return {
     displayWinner,
     clearGameboard,
+    expandUserData,
   };
 })();
-
-const player = (sign) => {
-  const playerSign = sign;
-
-  return { playerSign };
-};
-
-const player1 = player('x');
-const player2 = player('o');

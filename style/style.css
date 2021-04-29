@@ -51,9 +51,24 @@ body {
 section.container {
   margin: 20px 0;
   height: 100px;
+  overflow: hidden;
 }
 section.flex {
   justify-content: space-around;
+}
+section.container.flex.usr {
+  height: 200px;
+  transition: 0.3s;
+}
+section.minimized.container.flex {
+  height: 0px;
+}
+/* player-input styles*/
+form.flex {
+  flex-flow: column nowrap;
+}
+form.player-data {
+  padding-bottom: 20px;
 }
 
 /* btn classes*/
