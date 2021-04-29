@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 body {
   display: flex;
   justify-content: center;
@@ -5,6 +6,7 @@ body {
   flex-flow: column nowrap;
   min-height: 100vh;
   background-color: #eeeeee;
+  font-family: 'Roboto', sans-serif;
 }
 
 /* navbar styles */
@@ -69,6 +71,21 @@ form.flex {
 }
 form.player-data {
   padding-bottom: 20px;
+}
+.player-data {
+  color: #7cffc4;
+}
+
+.player-input {
+  background: transparent;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+.player-input:focus {
+  outline: none;
+}
+.player-input::placeholder {
+  color: hsl(164, 50%, 72%);
 }
 
 /* btn classes*/
