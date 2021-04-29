@@ -130,6 +130,7 @@ const displayController = (() => {
 
     boxDivsArr.forEach((div, divNumber) =>
       div.addEventListener('click', () => {
+        if (div.textContent) return;
         if (gameBoard.gameState === 'starting') {
           if (!formIsExpanded()) return expandUserData();
           return;
@@ -139,7 +140,8 @@ const displayController = (() => {
           return displayController.clearGameboard();
         }
         gameBoard.changeCurrentSign();
-        if (!div.textContent) div.textContent = gameBoard.currentSign;
+
+        div.textContent = gameBoard.currentSign;
         gameBoard.setPosition(gameBoard.currentSign, divNumber);
         gameBoard.checkWinner();
       }),
