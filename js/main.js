@@ -116,6 +116,12 @@ const gameBoard = (() => {
 })();
 
 const displayController = (() => {
+  const formIsExpanded = () => {
+    const formElement = document.getElementById('player-data-container');
+    if (formElement.classList.contains('minimized')) return false;
+    return true;
+  };
+
   const initializeGameboard = (() => {
     const gameBoardDiv = document.getElementById('gameboard');
 
@@ -124,7 +130,11 @@ const displayController = (() => {
 
     boxDivsArr.forEach((div, divNumber) =>
       div.addEventListener('click', () => {
-        if (gameBoard.gameState === 'starting') return expandUserData();
+        if (gameBoard.gameState === 'starting') {
+          if (!formIsExpanded()) return expandUserData();
+          return;
+        }
+
         if (gameBoard.gameState === 'finished') {
           return displayController.clearGameboard();
         }
@@ -158,6 +168,7 @@ const displayController = (() => {
     boxDivsArr.forEach((div) => {
       div.innerHTML = '';
     });
+
     displayController.displayWinner('', true);
     gameBoard.resetGameboard();
   };
@@ -182,5 +193,6 @@ const displayController = (() => {
     displayWinner,
     clearGameboard,
     expandUserData,
+    formIsExpanded,
   };
 })();
